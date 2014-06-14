@@ -24,13 +24,13 @@ enum SLogLevel : Int {
   case Error
   case Warning
   case Info
-  case Debug
+  case Verbose
 }
 
 var slogLevel:  SLogLevel = SLogLevel.None
 
-func SLogDebug(logString:  String) {
-  SLog(.Debug, logString)
+func SLogVerbose(logString:  String) {
+  SLog(.Verbose, logString)
 }
 
 func SLogInfo(logString:  String) {
@@ -46,11 +46,11 @@ func SLogError(logString:  String) {
 }
 
 func ENTRY_LOG(functionName:  String = __FUNCTION__) {
-  SLogDebug("ENTRY " + functionName)
+  SLogVerbose("ENTRY " + functionName)
 }
 
 func EXIT_LOG(functionName:  String = __FUNCTION__) {
-  SLogDebug("EXIT " + functionName)
+  SLogVerbose("EXIT " + functionName)
 }
 
 func SLog(logLevel:  SLogLevel, logString:  String) {
@@ -64,8 +64,8 @@ func SLog(logLevel:  SLogLevel, logString:  String) {
 
 func stringForLogLevel(logLevel:  SLogLevel) -> String {
   switch logLevel {
-  case .Debug:
-      return "DEBUG"
+  case .Verbose:
+      return "VERBOSE"
   case .Info:
       return "INFO"
   case .Warning:
