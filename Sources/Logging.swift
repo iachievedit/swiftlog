@@ -71,11 +71,12 @@ func SLog(logLevel:SLogLevel, logString:String) {
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log)
-    if let logFilePath = slogFilePath {
-      do {
-        try log.writeToFile(logFilePath, atomically:false, encoding: NSUTF8StringEncoding)
-      } catch {
-      }
+    if let logFilePath = slogFilePath,
+       let fileHandle = NSFileHandle(forWritingAtPath:logFilePath),
+       let data       = "\(log)\n".dataUsingEncoding(NSUTF8StringEncoding) {
+        fileHandle.seekToEndOfFile()
+	fileHandle.writeData(data)
+	fileHandle.closeFile()
     }
   }
 }
