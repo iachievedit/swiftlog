@@ -56,7 +56,7 @@ public func EXIT_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("EXIT  " + functionName)
 }
 
-public func slogToFileAtPath(path:String, attributes:[String:AnyObject]?) {
+public func slogToFileAtPath(path:String, attributes:[String:AnyObject]? = nil) {
   let fileManager = NSFileManager.defaultManager()
   slogFilePath = path
 
@@ -73,7 +73,7 @@ func SLog(logLevel:SLogLevel, logString:String) {
     print(log)
     if let logFilePath = slogFilePath {
       do {
-        try log.writeToFile(logFilePath, atomically:true, encoding: NSUTF8StringEncoding)
+        try log.writeToFile(logFilePath, atomically:false, encoding: NSUTF8StringEncoding)
       } catch {
       }
     }
