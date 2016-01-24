@@ -20,7 +20,7 @@
 import Foundation
 import Rainbow
 
-enum SLogLevel:Int {
+public enum SLogLevel:Int {
 case None = 0
 case Error
 case Warning
@@ -28,29 +28,29 @@ case Info
 case Verbose
 }
 
-var slogLevel:SLogLevel = SLogLevel.None
+public var slogLevel:SLogLevel = SLogLevel.None
                 
-func SLogVerbose(logString:String) {
+public func SLogVerbose(logString:String) {
   SLog(.Verbose, logString:logString.green)
 }
 
-func SLogInfo(logString:String) {
+public func SLogInfo(logString:String) {
   SLog(.Info, logString:logString.white)
 }
 
-func SLogWarning(logString:String) {
+public func SLogWarning(logString:String) {
   SLog(.Warning, logString:logString.yellow)
 }
 
-func SLogError(logString:String) {
+public func SLogError(logString:String) {
   SLog(.Error, logString:logString.red)
 }
 
-func ENTRY_LOG(functionName:String = __FUNCTION__) {
+public func ENTRY_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("ENTRY " + functionName)
 }
 
-func EXIT_LOG(functionName:String = __FUNCTION__) {
+public func EXIT_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("EXIT " + functionName)
 }
 
