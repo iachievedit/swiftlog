@@ -18,51 +18,52 @@
 //
 
 import Foundation
+import Rainbow
 
-enum SLogLevel : Int {
-  case None = 0
-  case Error
-  case Warning
-  case Info
-  case Verbose
+enum SLogLevel:Int {
+case None = 0
+case Error
+case Warning
+case Info
+case Verbose
 }
 
-var slogLevel:  SLogLevel = SLogLevel.None
-
-func SLogVerbose(logString:  String) {
-  SLog(.Verbose, logString)
+var slogLevel:SLogLevel = SLogLevel.None
+                
+func SLogVerbose(logString:String) {
+  SLog(.Verbose, logString:logString.green)
 }
 
-func SLogInfo(logString:  String) {
-  SLog(.Info, logString)
+func SLogInfo(logString:String) {
+  SLog(.Info, logString:logString.white)
 }
 
-func SLogWarning(logString:  String) {
-  SLog(.Warning, logString)
+func SLogWarning(logString:String) {
+  SLog(.Warning, logString:logString.yellow)
 }
 
-func SLogError(logString:  String) {
-  SLog(.Error, logString)
+func SLogError(logString:String) {
+  SLog(.Error, logString:logString.red)
 }
 
-func ENTRY_LOG(functionName:  String = __FUNCTION__) {
+func ENTRY_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("ENTRY " + functionName)
 }
 
-func EXIT_LOG(functionName:  String = __FUNCTION__) {
+func EXIT_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("EXIT " + functionName)
 }
 
-func SLog(logLevel:  SLogLevel, logString:  String) {
+func SLog(logLevel:SLogLevel, logString:String) {
   
   let log = stringForLogLevel(logLevel) + " - " + logString
-  let appLogLevel = slogLevel.toRaw()
-  if (appLogLevel >= logLevel.toRaw()) {
-    NSLog(log)
+  let appLogLevel = slogLevel.rawValue
+  if (appLogLevel >= logLevel.rawValue) {
+    print(log)
   }
 }
 
-func stringForLogLevel(logLevel:  SLogLevel) -> String {
+func stringForLogLevel(logLevel:SLogLevel) -> String {
   switch logLevel {
   case .Verbose:
       return "VERBOSE"
