@@ -29,7 +29,9 @@ case Verbose
 }
 
 public var slogLevel:SLogLevel = SLogLevel.None
-                
+
+private var slogFilePath:String? = nil
+
 public func SLogVerbose(logString:String) {
   SLog(.Verbose, logString:logString.green)
 }
@@ -51,7 +53,16 @@ public func ENTRY_LOG(functionName:String = __FUNCTION__) {
 }
 
 public func EXIT_LOG(functionName:String = __FUNCTION__) {
-  SLogVerbose("EXIT " + functionName)
+  SLogVerbose("EXIT  " + functionName)
+}
+
+public func slogToFileAtPath(path:String, attributes:[String:AnyObject]?) {
+  let fileManager = NSFileManager.defaultManager()
+  slogFilePath = path
+
+  if let logFile = slogFilePath {
+    fileManager.createFileAtPath(logFile, contents:nil, attributes:attributes)
+  }
 }
 
 func SLog(logLevel:SLogLevel, logString:String) {
@@ -60,6 +71,12 @@ func SLog(logLevel:SLogLevel, logString:String) {
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log)
+    if let logFilePath = slogFilePath {
+      do {
+        try log.writeToFile(logFilePath, atomically:true, encoding: NSUTF8StringEncoding)
+      } catch {
+      }
+    }
   }
 }
 
