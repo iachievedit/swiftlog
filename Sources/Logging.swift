@@ -56,12 +56,14 @@ public func EXIT_LOG(functionName:String = __FUNCTION__) {
   SLogVerbose("EXIT  " + functionName)
 }
 
-public func slogToFileAtPath(path:String, attributes:[String:AnyObject]? = nil) {
+public func slogToFileAtPath(path:String, append:Bool = false) {
   let fileManager = NSFileManager.defaultManager()
   slogFilePath = path
 
   if let logFile = slogFilePath {
-    fileManager.createFileAtPath(logFile, contents:nil, attributes:attributes)
+    if !append || !fileManager.fileExistsAtPath(path) {
+      fileManager.createFileAtPath(logFile, contents:nil, attributes:nil)
+    }
   }
 }
 
