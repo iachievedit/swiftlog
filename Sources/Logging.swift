@@ -66,15 +66,15 @@ func SLog(logLevel:SLogLevel, logString:String) {
 func stringForLogLevel(logLevel:SLogLevel) -> String {
   switch logLevel {
   case .Verbose:
-      return "VERBOSE"
+    return "VERBOSE".green.bold
   case .Info:
-      return "INFO"
+    return "INFO   ".white.bold
   case .Warning:
-      return "WARNING"
+    return "WARNING".yellow.bold
   case .Error:
-      return "ERROR"
+    return "ERROR  ".red.bold
   case .None:
-      return "NONE"
+    return "NONE"
   }
 
 }
