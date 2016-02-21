@@ -48,11 +48,11 @@ public func SLogError(logString:String) {
   SLog(.Error, logString:logString.red)
 }
 
-public func ENTRY_LOG(functionName:String = __FUNCTION__) {
+public func ENTRY_LOG(functionName:String = #function) {
   SLogVerbose("ENTRY " + functionName)
 }
 
-public func EXIT_LOG(functionName:String = __FUNCTION__) {
+public func EXIT_LOG(functionName:String = #function) {
   SLogVerbose("EXIT  " + functionName)
 }
 
