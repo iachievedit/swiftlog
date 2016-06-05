@@ -33,19 +33,19 @@ public var slogLevel:SLogLevel = SLogLevel.None
 private var slogFilePath:String? = nil
 
 public func SLogVerbose(logString:String) {
-  SLog(level:.Verbose, logString:logString.green)
+  SLog(logLevel:.Verbose, logString:logString.green)
 }
 
 public func SLogInfo(logString:String) {
-  SLog(level:.Info, logString:logString.white)
+  SLog(logLevel:.Info, logString:logString.white)
 }
 
 public func SLogWarning(logString:String) {
-  SLog(level:.Warning, logString:logString.yellow)
+  SLog(logLevel:.Warning, logString:logString.yellow)
 }
 
 public func SLogError(logString:String) {
-  SLog(level:.Error, logString:logString.red)
+  SLog(logLevel:.Error, logString:logString.red)
 }
 
 public func ENTRY_LOG(functionName:String = #function) {
