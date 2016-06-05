@@ -88,13 +88,13 @@ func stringForLogLevel(logLevel:SLogLevel) -> String {
   Rainbow.outputTarget = .Console
   switch logLevel {
   case .Verbose:
-    return "VERBOSE".green.bold
+    return "VERBOSE".green
   case .Info:
-    return "INFO   ".white.bold
+    return "INFO   ".white
   case .Warning:
-    return "WARNING".yellow.bold
+    return "WARNING".yellow
   case .Error:
-    return "ERROR  ".red.bold
+    return "ERROR  ".red
   case .None:
     return "NONE"
   }
