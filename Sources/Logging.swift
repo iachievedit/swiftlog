@@ -33,27 +33,27 @@ public var slogLevel:SLogLevel = SLogLevel.None
 private var slogFilePath:String? = nil
 
 public func SLogVerbose(logString:String) {
-  SLog(.Verbose, logString:logString.green)
+  SLog(level:.Verbose, logString:logString.green)
 }
 
 public func SLogInfo(logString:String) {
-  SLog(.Info, logString:logString.white)
+  SLog(level:.Info, logString:logString.white)
 }
 
 public func SLogWarning(logString:String) {
-  SLog(.Warning, logString:logString.yellow)
+  SLog(level:.Warning, logString:logString.yellow)
 }
 
 public func SLogError(logString:String) {
-  SLog(.Error, logString:logString.red)
+  SLog(level:.Error, logString:logString.red)
 }
 
 public func ENTRY_LOG(functionName:String = #function) {
-  SLogVerbose("ENTRY " + functionName)
+  SLogVerbose(logString:"ENTRY " + functionName)
 }
 
 public func EXIT_LOG(functionName:String = #function) {
-  SLogVerbose("EXIT  " + functionName)
+  SLogVerbose(logString:"EXIT  " + functionName)
 }
 
 public func slogToFileAtPath(path:String, append:Bool = false) {
@@ -69,7 +69,7 @@ public func slogToFileAtPath(path:String, append:Bool = false) {
 
 func SLog(logLevel:SLogLevel, logString:String) {
   
-  let log = stringForLogLevel(logLevel) + " - " + logString
+  let log = stringForLogLevel(logLevel:logLevel) + " - " + logString
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log)
