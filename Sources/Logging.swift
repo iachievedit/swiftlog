@@ -20,6 +20,7 @@
 import Foundation
 import Rainbow
 
+
 public enum SLogLevel:Int {
 case None = 0
 case Error
@@ -84,6 +85,7 @@ func SLog(logLevel:SLogLevel, logString:String) {
 }
 
 func stringForLogLevel(logLevel:SLogLevel) -> String {
+  Rainbow.outputTarget = .Console
   switch logLevel {
   case .Verbose:
     return "VERBOSE".green.bold
