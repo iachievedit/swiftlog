@@ -56,7 +56,7 @@ public func EXIT_LOG(functionName:String = #function) {
   SLogVerbose(logString:"EXIT  " + functionName)
 }
 
-public func slogToFileAtPath(path:String, append:Bool = false) {
+public func slogToFile(atPath path:String, append:Bool = false) {
   let fileManager = NSFileManager.defaultManager()
   slogFilePath = path
 
