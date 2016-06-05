@@ -1,6 +1,6 @@
 import swiftlog
 
-func multiply(multiplicand:Int, multiplier:Int) -> Int {
+func multiply(_ multiplicand:Int, multiplier:Int) -> Int {
   ENTRY_LOG()
   let result = multiplicand * multiplier
   EXIT_LOG()
@@ -10,9 +10,9 @@ func multiply(multiplicand:Int, multiplier:Int) -> Int {
 slogLevel = .Verbose
 slogToFile(atPath:"/tmp/log.txt", append:false)
 
-SLogVerbose(logString:"A verbose log")
-SLogInfo(logString:"An info log")
-SLogWarning(logString:"A warning log")
-SLogError(logString:"An error log")
+SLogVerbose("A verbose log")
+SLogInfo("An info log")
+SLogWarning("A warning log")
+SLogError("An error log")
 
-SLogVerbose(logString:"10 times 10 equals \(multiply(multiplicand:10, multiplier:10))")
+SLogVerbose("10 times 10 equals \(multiply(10, multiplier:10))")
