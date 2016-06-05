@@ -61,8 +61,8 @@ public func slogToFileAtPath(path:String, append:Bool = false) {
   slogFilePath = path
 
   if let logFile = slogFilePath {
-    if !append || !fileManager.fileExistsAtPath(path) {
-      fileManager.createFileAtPath(logFile, contents:nil, attributes:nil)
+    if !append || !fileManager.fileExists(atPath:path) {
+      fileManager.createFile(atPath:logFile, contents:nil, attributes:nil)
     }
   }
 }
