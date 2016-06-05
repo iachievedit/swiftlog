@@ -32,28 +32,28 @@ public var slogLevel:SLogLevel = SLogLevel.None
 
 private var slogFilePath:String? = nil
 
-public func SLogVerbose(logString:String) {
+public func SLogVerbose(_ logString:String) {
   SLog(logLevel:.Verbose, logString:logString.green)
 }
 
-public func SLogInfo(logString:String) {
+public func SLogInfo(_ logString:String) {
   SLog(logLevel:.Info, logString:logString.white)
 }
 
-public func SLogWarning(logString:String) {
+public func SLogWarning(_ logString:String) {
   SLog(logLevel:.Warning, logString:logString.yellow)
 }
 
-public func SLogError(logString:String) {
+public func SLogError(_ logString:String) {
   SLog(logLevel:.Error, logString:logString.red)
 }
 
 public func ENTRY_LOG(functionName:String = #function) {
-  SLogVerbose(logString:"ENTRY " + functionName)
+  SLogVerbose("ENTRY " + functionName)
 }
 
 public func EXIT_LOG(functionName:String = #function) {
-  SLogVerbose(logString:"EXIT  " + functionName)
+  SLogVerbose("EXIT  " + functionName)
 }
 
 public func slogToFile(atPath path:String, append:Bool = false) {
