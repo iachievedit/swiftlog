@@ -62,7 +62,7 @@ public func slogToFileAtPath(path:String, append:Bool = false) {
 
   if let logFile = slogFilePath {
     if !append || !fileManager.fileExists(atPath:path) {
-      fileManager.createFile(atPath:logFile, contents:nil, attributes:nil)
+      _ = fileManager.createFile(atPath:logFile, contents:nil, attributes:nil)
     }
   }
 }
@@ -75,8 +75,8 @@ func SLog(logLevel:SLogLevel, logString:String) {
     print(log)
     if let logFilePath = slogFilePath,
        let fileHandle = NSFileHandle(forWritingAtPath:logFilePath),
-       let data       = "\(log)\n".dataUsingEncoding(NSUTF8StringEncoding) {
-        fileHandle.seekToEndOfFile()
+       let data       = log.data(using:NSUTF8StringEncoding) {
+        _ = fileHandle.seekToEndOfFile()
 	fileHandle.writeData(data)
 	fileHandle.closeFile()
     }
