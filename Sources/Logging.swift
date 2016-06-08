@@ -32,20 +32,20 @@ public var slogLevel:SLogLevel = SLogLevel.None
 
 private var slogFilePath:String? = nil
 
-public func SLogVerbose(logString:String) {
-  SLog(.Verbose, logString:logString.green)
+public func SLogVerbose(_ logString:String) {
+  SLog(logLevel:.Verbose, logString:logString.green)
 }
 
-public func SLogInfo(logString:String) {
-  SLog(.Info, logString:logString.white)
+public func SLogInfo(_ logString:String) {
+  SLog(logLevel:.Info, logString:logString.white)
 }
 
-public func SLogWarning(logString:String) {
-  SLog(.Warning, logString:logString.yellow)
+public func SLogWarning(_ logString:String) {
+  SLog(logLevel:.Warning, logString:logString.yellow)
 }
 
-public func SLogError(logString:String) {
-  SLog(.Error, logString:logString.red)
+public func SLogError(_ logString:String) {
+  SLog(logLevel:.Error, logString:logString.red)
 }
 
 public func ENTRY_LOG(functionName:String = #function) {
@@ -56,27 +56,27 @@ public func EXIT_LOG(functionName:String = #function) {
   SLogVerbose("EXIT  " + functionName)
 }
 
-public func slogToFileAtPath(path:String, append:Bool = false) {
+public func slogToFile(atPath path:String, append:Bool = false) {
   let fileManager = NSFileManager.defaultManager()
   slogFilePath = path
 
   if let logFile = slogFilePath {
-    if !append || !fileManager.fileExistsAtPath(path) {
-      fileManager.createFileAtPath(logFile, contents:nil, attributes:nil)
+    if !append || !fileManager.fileExists(atPath:path) {
+      _ = fileManager.createFile(atPath:logFile, contents:nil, attributes:nil)
     }
   }
 }
 
 func SLog(logLevel:SLogLevel, logString:String) {
-  
-  let log = stringForLogLevel(logLevel) + " - " + logString
+  let date = NSDate()
+  let log  = "\(date)" + stringForLogLevel(logLevel:logLevel) + " - " + logString
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log)
     if let logFilePath = slogFilePath,
        let fileHandle = NSFileHandle(forWritingAtPath:logFilePath),
-       let data       = "\(log)\n".dataUsingEncoding(NSUTF8StringEncoding) {
-        fileHandle.seekToEndOfFile()
+       let data       = log.data(using:NSUTF8StringEncoding) {
+        _ = fileHandle.seekToEndOfFile()
 	fileHandle.writeData(data)
 	fileHandle.closeFile()
     }
@@ -84,6 +84,7 @@ func SLog(logLevel:SLogLevel, logString:String) {
 }
 
 func stringForLogLevel(logLevel:SLogLevel) -> String {
+  Rainbow.outputTarget = .Console
   switch logLevel {
   case .Verbose:
     return "VERBOSE".green.bold

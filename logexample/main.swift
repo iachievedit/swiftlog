@@ -1,6 +1,6 @@
 import swiftlog
 
-func multiply(multiplicand:Int, multiplier:Int) -> Int {
+func multiply(_ multiplicand:Int, multiplier:Int) -> Int {
   ENTRY_LOG()
   let result = multiplicand * multiplier
   EXIT_LOG()
@@ -8,7 +8,7 @@ func multiply(multiplicand:Int, multiplier:Int) -> Int {
 }
 
 slogLevel = .Verbose
-slogToFileAtPath("/tmp/log.txt", append:false)
+slogToFile(atPath:"/tmp/log.txt", append:false)
 
 SLogVerbose("A verbose log")
 SLogInfo("An info log")
