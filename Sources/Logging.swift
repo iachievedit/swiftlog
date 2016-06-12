@@ -69,10 +69,10 @@ public func slogToFile(atPath path:String, append:Bool = false) {
 
 func SLog(logLevel:SLogLevel, logString:String) {
   let date = NSDate()
-  let log  = "\(date) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString
+  let log  = "\(date) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
-    print(log)
+    print(log, terminator:"")
     if let logFilePath = slogFilePath,
        let fileHandle = NSFileHandle(forWritingAtPath:logFilePath),
        let data       = log.data(using:NSUTF8StringEncoding) {
