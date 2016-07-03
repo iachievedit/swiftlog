@@ -57,7 +57,7 @@ public func EXIT_LOG(functionName:String = #function) {
 }
 
 public func slogToFile(atPath path:String, append:Bool = false) {
-  let fileManager = NSFileManager.defaultManager()
+  let fileManager = FileManager.default()
   slogFilePath = path
 
   if let logFile = slogFilePath {
@@ -68,16 +68,16 @@ public func slogToFile(atPath path:String, append:Bool = false) {
 }
 
 func SLog(logLevel:SLogLevel, logString:String) {
-  let date = NSDate()
+  let date = Date()
   let log  = "\(date) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log, terminator:"")
     if let logFilePath = slogFilePath,
-       let fileHandle = NSFileHandle(forWritingAtPath:logFilePath),
-       let data       = log.data(using:NSUTF8StringEncoding) {
+       let fileHandle = FileHandle(forWritingAtPath:logFilePath),
+       let data       = log.data(using:String.Encoding.utf8) {
         _ = fileHandle.seekToEndOfFile()
-	fileHandle.writeData(data)
+	fileHandle.write(data)
 	fileHandle.closeFile()
     }
   }
