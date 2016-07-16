@@ -21,31 +21,31 @@ import Foundation
 import Rainbow
 
 public enum SLogLevel:Int {
-case None = 0
-case Error
-case Warning
-case Info
-case Verbose
+  case None = 0
+  case Error
+  case Warning
+  case Info
+  case Verbose
 }
 
 public var slogLevel:SLogLevel = SLogLevel.None
 
 private var slogFilePath:String? = nil
 
-public func SLogVerbose(_ logString:String) {
-  SLog(logLevel:.Verbose, logString:logString.green)
+public func SLogVerbose(_ logString:String, filePath:String = #file, lineNumber:Int = #line) {
+  SLog(logLevel:.Verbose, logString:logString.green, filePath:filePath, lineNumber:lineNumber)
 }
 
-public func SLogInfo(_ logString:String) {
-  SLog(logLevel:.Info, logString:logString.white)
+public func SLogInfo(_ logString:String, filePath:String = #file, lineNumber:Int = #line) {
+  SLog(logLevel:.Info, logString:logString.white, filePath:filePath, lineNumber:lineNumber)
 }
 
-public func SLogWarning(_ logString:String) {
-  SLog(logLevel:.Warning, logString:logString.yellow)
+public func SLogWarning(_ logString:String, filePath:String = #file, lineNumber:Int = #line) {
+  SLog(logLevel:.Warning, logString:logString.yellow, filePath:filePath, lineNumber:lineNumber)
 }
 
-public func SLogError(_ logString:String) {
-  SLog(logLevel:.Error, logString:logString.red)
+public func SLogError(_ logString:String, filePath:String = #file, lineNumber:Int = #line) {
+  SLog(logLevel:.Error, logString:logString.red, filePath:filePath, lineNumber:lineNumber)
 }
 
 public func ENTRY_LOG(functionName:String = #function) {
@@ -67,9 +67,9 @@ public func slogToFile(atPath path:String, append:Bool = false) {
   }
 }
 
-func SLog(logLevel:SLogLevel, logString:String, filePath:String = #file, lineNumber:Int = #line) {
-                       let date = Date()
-                       let fileUrl = URL(fileURLWithPath:filePath)                       
+func SLog(logLevel:SLogLevel, logString:String, filePath:String, lineNumber:Int) {
+  let date = Date()
+  let fileUrl = URL(fileURLWithPath:filePath)                       
   let log  = "\(date) - \(fileUrl.lastPathComponent):\(lineNumber) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
