@@ -48,12 +48,12 @@ public func SLogError(_ logString:String, filePath:String = #file, lineNumber:In
   SLog(logLevel:.Error, logString:logString.red, filePath:filePath, lineNumber:lineNumber)
 }
 
-public func ENTRY_LOG(functionName:String = #function) {
-  SLogVerbose("ENTRY " + functionName)
+public func ENTRY_LOG(functionName:String = #function, filePath:String = #file, lineNumber:Int = #line) {
+  SLogVerbose("ENTRY " + functionName, filePath:filePath, lineNumber:lineNumber)
 }
 
-public func EXIT_LOG(functionName:String = #function) {
-  SLogVerbose("EXIT  " + functionName)
+public func EXIT_LOG(functionName:String = #function, filePath:String = #file, lineNumber:Int = #line) {
+  SLogVerbose("EXIT  " + functionName, filePath:filePath, lineNumber:lineNumber)
 }
 
 public func slogToFile(atPath path:String, append:Bool = false) {
@@ -69,7 +69,7 @@ public func slogToFile(atPath path:String, append:Bool = false) {
 
 func SLog(logLevel:SLogLevel, logString:String, filePath:String, lineNumber:Int) {
   let date = Date()
-  let fileUrl = URL(fileURLWithPath:filePath)                       
+  let fileUrl = URL(fileURLWithPath:filePath)!
   let log  = "\(date) - \(fileUrl.lastPathComponent):\(lineNumber) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
