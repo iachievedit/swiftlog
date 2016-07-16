@@ -67,9 +67,10 @@ public func slogToFile(atPath path:String, append:Bool = false) {
   }
 }
 
-func SLog(logLevel:SLogLevel, logString:String, fileName:String = #file, lineNumber:Int = #line) {
-  let date = Date()
-  let log  = "\(date) - \(fileName):\(lineNumber) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
+func SLog(logLevel:SLogLevel, logString:String, filePath:String = #file, lineNumber:Int = #line) {
+                       let date = Date()
+                       let fileUrl = URL(fileURLWithPath:filePath)                       
+  let log  = "\(date) - \(fileUrl.lastPathComponent):\(lineNumber) - " + stringForLogLevel(logLevel:logLevel) + " - " + logString + "\n"
   let appLogLevel = slogLevel.rawValue
   if (appLogLevel >= logLevel.rawValue) {
     print(log, terminator:"")
